@@ -1,0 +1,791 @@
+{
+	"info": {
+		"_postman_id": "7422986f-50e5-46ca-896c-1b2cfd63204b",
+		"name": "ISBN-10 Validation API Tests",
+		"description": "Collection of test cases for ISBN-10 validation API (SOAP)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "46698398",
+		"_collection_link": "https://www.postman.com/testingacdemy/workspace/atb12x/collection/46698398-7422986f-50e5-46ca-896c-1b2cfd63204b?action=share&source=collection_link&creator=46698398"
+	},
+	"item": [
+		{
+			"name": "TC001 - Validate a correct ISBN-10 number",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://webservices.example.com/IsValidISBN10"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservices.example.com/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <web:IsValidISBN10>\n         <web:sISBN>0306406152</web:sISBN>\n      </web:IsValidISBN10>\n   </soapenv:Body>\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "https://example.com/validateISBN",
+					"protocol": "https",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"validateISBN"
+					]
+				},
+				"description": "Validate a correct ISBN-10 number"
+			},
+			"response": []
+		},
+		{
+			"name": "TC002 - Validate a correct ISBN-10 with 'X' as checksum",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://webservices.example.com/IsValidISBN10"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservices.example.com/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <web:IsValidISBN10>\n         <web:sISBN>048665088X</web:sISBN>\n      </web:IsValidISBN10>\n   </soapenv:Body>\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "https://example.com/validateISBN",
+					"protocol": "https",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"validateISBN"
+					]
+				},
+				"description": "Validate a correct ISBN-10 with 'X' as checksum"
+			},
+			"response": []
+		},
+		{
+			"name": "TC003 - Validate an incorrect ISBN-10 number",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://webservices.example.com/IsValidISBN10"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservices.example.com/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <web:IsValidISBN10>\n         <web:sISBN>1234567890</web:sISBN>\n      </web:IsValidISBN10>\n   </soapenv:Body>\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "https://example.com/validateISBN",
+					"protocol": "https",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"validateISBN"
+					]
+				},
+				"description": "Validate an incorrect ISBN-10 number"
+			},
+			"response": []
+		},
+		{
+			"name": "TC004 - Test with alphabetic characters",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://webservices.example.com/IsValidISBN10"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservices.example.com/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <web:IsValidISBN10>\n         <web:sISBN>ABCDEFGHIJ</web:sISBN>\n      </web:IsValidISBN10>\n   </soapenv:Body>\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "https://example.com/validateISBN",
+					"protocol": "https",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"validateISBN"
+					]
+				},
+				"description": "Test with alphabetic characters"
+			},
+			"response": []
+		},
+		{
+			"name": "TC005 - Short (9-digit) ISBN ending in 'X'",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://webservices.example.com/IsValidISBN10"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservices.example.com/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <web:IsValidISBN10>\n         <web:sISBN>12345678X</web:sISBN>\n      </web:IsValidISBN10>\n   </soapenv:Body>\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "https://example.com/validateISBN",
+					"protocol": "https",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"validateISBN"
+					]
+				},
+				"description": "Short (9-digit) ISBN ending in 'X'"
+			},
+			"response": []
+		},
+		{
+			"name": "TC006 - Test with empty string input",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://webservices.example.com/IsValidISBN10"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservices.example.com/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <web:IsValidISBN10>\n         <web:sISBN></web:sISBN>\n      </web:IsValidISBN10>\n   </soapenv:Body>\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "https://example.com/validateISBN",
+					"protocol": "https",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"validateISBN"
+					]
+				},
+				"description": "Test with empty string input"
+			},
+			"response": []
+		},
+		{
+			"name": "TC007 - Test with null input",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://webservices.example.com/IsValidISBN10"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservices.example.com/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <web:IsValidISBN10>\n         <web:sISBN></web:sISBN>\n      </web:IsValidISBN10>\n   </soapenv:Body>\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "https://example.com/validateISBN",
+					"protocol": "https",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"validateISBN"
+					]
+				},
+				"description": "Test with null input"
+			},
+			"response": []
+		},
+		{
+			"name": "TC008 - Test with fewer than 10 digits",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://webservices.example.com/IsValidISBN10"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservices.example.com/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <web:IsValidISBN10>\n         <web:sISBN>12345</web:sISBN>\n      </web:IsValidISBN10>\n   </soapenv:Body>\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "https://example.com/validateISBN",
+					"protocol": "https",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"validateISBN"
+					]
+				},
+				"description": "Test with fewer than 10 digits"
+			},
+			"response": []
+		},
+		{
+			"name": "TC009 - Test with more than 10 digits",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://webservices.example.com/IsValidISBN10"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservices.example.com/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <web:IsValidISBN10>\n         <web:sISBN>1234567890123</web:sISBN>\n      </web:IsValidISBN10>\n   </soapenv:Body>\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "https://example.com/validateISBN",
+					"protocol": "https",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"validateISBN"
+					]
+				},
+				"description": "Test with more than 10 digits"
+			},
+			"response": []
+		},
+		{
+			"name": "TC010 - Test with all zeros",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://webservices.example.com/IsValidISBN10"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservices.example.com/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <web:IsValidISBN10>\n         <web:sISBN>0000000000</web:sISBN>\n      </web:IsValidISBN10>\n   </soapenv:Body>\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "https://example.com/validateISBN",
+					"protocol": "https",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"validateISBN"
+					]
+				},
+				"description": "Test with all zeros"
+			},
+			"response": []
+		},
+		{
+			"name": "TC011 - Arabic numerals as ISBN",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://webservices.example.com/IsValidISBN10"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservices.example.com/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <web:IsValidISBN10>\n         <web:sISBN>١٢٣٤٥٦٧٨٩٠</web:sISBN>\n      </web:IsValidISBN10>\n   </soapenv:Body>\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "https://example.com/validateISBN",
+					"protocol": "https",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"validateISBN"
+					]
+				},
+				"description": "Arabic numerals as ISBN"
+			},
+			"response": []
+		},
+		{
+			"name": "TC012 - Chinese numerals",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://webservices.example.com/IsValidISBN10"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservices.example.com/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <web:IsValidISBN10>\n         <web:sISBN>一二三四五六七八九十</web:sISBN>\n      </web:IsValidISBN10>\n   </soapenv:Body>\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "https://example.com/validateISBN",
+					"protocol": "https",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"validateISBN"
+					]
+				},
+				"description": "Chinese numerals"
+			},
+			"response": []
+		},
+		{
+			"name": "TC013 - Test with emoji characters",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://webservices.example.com/IsValidISBN10"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservices.example.com/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <web:IsValidISBN10>\n         <web:sISBN>😊😂🤣🧐😎</web:sISBN>\n      </web:IsValidISBN10>\n   </soapenv:Body>\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "https://example.com/validateISBN",
+					"protocol": "https",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"validateISBN"
+					]
+				},
+				"description": "Test with emoji characters"
+			},
+			"response": []
+		},
+		{
+			"name": "TC014 - Test with special characters",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://webservices.example.com/IsValidISBN10"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservices.example.com/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <web:IsValidISBN10>\n         <web:sISBN>12@45#78%90</web:sISBN>\n      </web:IsValidISBN10>\n   </soapenv:Body>\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "https://example.com/validateISBN",
+					"protocol": "https",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"validateISBN"
+					]
+				},
+				"description": "Test with special characters"
+			},
+			"response": []
+		},
+		{
+			"name": "TC015 - Test with alphanumeric string",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://webservices.example.com/IsValidISBN10"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservices.example.com/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <web:IsValidISBN10>\n         <web:sISBN>abc1234567</web:sISBN>\n      </web:IsValidISBN10>\n   </soapenv:Body>\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "https://example.com/validateISBN",
+					"protocol": "https",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"validateISBN"
+					]
+				},
+				"description": "Test with alphanumeric string"
+			},
+			"response": []
+		},
+		{
+			"name": "TC016 - Missing sISBN field",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://webservices.example.com/IsValidISBN10"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservices.example.com/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <web:IsValidISBN10/>\n   </soapenv:Body>\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "https://example.com/validateISBN",
+					"protocol": "https",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"validateISBN"
+					]
+				},
+				"description": "Missing sISBN field"
+			},
+			"response": []
+		},
+		{
+			"name": "TC017 - Malformed XML envelope",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://webservices.example.com/IsValidISBN10"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<Invalid><MissingEnvelope></Invalid>"
+				},
+				"url": {
+					"raw": "https://example.com/validateISBN",
+					"protocol": "https",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"validateISBN"
+					]
+				},
+				"description": "Malformed XML envelope"
+			},
+			"response": []
+		},
+		{
+			"name": "TC018 - No Content-Type header",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservices.example.com/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <web:IsValidISBN10>\n         <web:sISBN>1234567890</web:sISBN>\n      </web:IsValidISBN10>\n   </soapenv:Body>\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "https://example.com/validateISBN",
+					"protocol": "https",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"validateISBN"
+					]
+				},
+				"description": "No Content-Type header"
+			},
+			"response": []
+		},
+		{
+			"name": "TC019 - Wrong header",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/plain"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservices.example.com/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <web:IsValidISBN10>\n         <web:sISBN>1234567890</web:sISBN>\n      </web:IsValidISBN10>\n   </soapenv:Body>\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "https://example.com/validateISBN",
+					"protocol": "https",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"validateISBN"
+					]
+				},
+				"description": "Wrong header"
+			},
+			"response": []
+		},
+		{
+			"name": "TC020 - Test with no envelope",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://webservices.example.com/IsValidISBN10"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<Body><web:IsValidISBN10><web:sISBN>1234567890</web:sISBN></web:IsValidISBN10></Body>"
+				},
+				"url": {
+					"raw": "https://example.com/validateISBN",
+					"protocol": "https",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"validateISBN"
+					]
+				},
+				"description": "Test with no envelope"
+			},
+			"response": []
+		},
+		{
+			"name": "TC021 - No session/cookie used",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://webservices.example.com/IsValidISBN10"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservices.example.com/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <web:IsValidISBN10>\n         <web:sISBN>Cookie not set</web:sISBN>\n      </web:IsValidISBN10>\n   </soapenv:Body>\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "https://example.com/validateISBN",
+					"protocol": "https",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"validateISBN"
+					]
+				},
+				"description": "No session/cookie used"
+			},
+			"response": []
+		},
+		{
+			"name": "TC022 - Unrelated fields in SOAP request",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://webservices.example.com/IsValidISBN10"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservices.example.com/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <web:IsValidISBN10>\n         <web:sISBN>1234567890</web:sISBN>\n         <web:Extra>Hello</web:Extra>\n      </web:IsValidISBN10>\n   </soapenv:Body>\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "https://example.com/validateISBN",
+					"protocol": "https",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"validateISBN"
+					]
+				},
+				"description": "Unrelated fields in SOAP request"
+			},
+			"response": []
+		},
+		{
+			"name": "TC023 - Multiple valid inputs concurrently",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://webservices.example.com/IsValidISBN10"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservices.example.com/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <web:IsValidISBN10>\n         <web:sISBN>Concurrent Requests</web:sISBN>\n      </web:IsValidISBN10>\n   </soapenv:Body>\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "https://example.com/validateISBN",
+					"protocol": "https",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"validateISBN"
+					]
+				},
+				"description": "Multiple valid inputs concurrently"
+			},
+			"response": []
+		},
+		{
+			"name": "TC024 - Repeating same ISBN multiple times",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://webservices.example.com/IsValidISBN10"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://webservices.example.com/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <web:IsValidISBN10>\n         <web:sISBN>Repeated Request</web:sISBN>\n      </web:IsValidISBN10>\n   </soapenv:Body>\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "https://example.com/validateISBN",
+					"protocol": "https",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"validateISBN"
+					]
+				},
+				"description": "Repeating same ISBN multiple times"
+			},
+			"response": []
+		}
+	]
+}
